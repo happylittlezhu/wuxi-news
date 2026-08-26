@@ -1,0 +1,22 @@
+/* 全局样式 */
+page {
+  --brand: #1F3B73;
+  --brand2: #3a5da8;
+  --accent: #c8a24a;
+  --bg: #eef1f6;
+  --card: #ffffff;
+  --ink: #1c2536;
+  --sub: #66707f;
+  --line: #e6e9f0;
+  --chip: #eef3fb;
+  --link: #1155cc;
+  background: #eef1f6;
+  color: #1c2536;
+  font-size: 28rpx;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+view, text, scroll-view {
+  box-sizing: border-box;
+}

@@ -1,0 +1,102 @@
+<view class="page">
+  <!-- 顶部横幅 -->
+  <view class="top">
+    <view class="top-title">{{topTitle}}</view>
+    <view class="top-sub">{{topSub}}</view>
+    <view class="accent-bar"></view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-dot"></view>
+    <text>加载中...</text>
+  </view>
+
+  <!-- ==================== 当日动态 ==================== -->
+  <view class="wrap" wx:if="{{!loading && activeTab === 'today'}}">
+    <view class="daterow">
+      <view class="dot"></view>
+      <text>{{dateLine}}</text>
+    </view>
+
+    <view class="feed">
+      <view class="card" wx:for="{{today}}" wx:key="index">
+        <view class="card-title">
+          <view class="idx">{{index + 1}}</view>
+          <text class="t">{{item.title}}</text>
+        </view>
+        <view class="event" wx:if="{{item.event}}">{{item.event}}</view>
+        <view class="relation" wx:if="{{item.relation}}">
+          <view class="relation-lab">📍 与我市关联关系及点评</view>
+          <view class="relation-text">{{item.relation}}</view>
+        </view>
+        <view class="card-foot">
+          <text class="src-text">📰 {{item.source || '查看来源'}}</text>
+          <view class="src-link" wx:if="{{item.url}}" bindtap="copyLink" data-url="{{item.url}}">🔗 查看原文</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{!today.length}}">今日暂无上报简讯</view>
+  </view>
+
+  <!-- ==================== 历史动态 ==================== -->
+  <view class="wrap" wx:if="{{!loading && activeTab === 'history'}}">
+    <!-- 工具区 -->
+    <view class="tools">
+      <input class="search" placeholder="🔍 搜索企业 / 事项 / 城市 / 领域…" bindinput="onSearch" value="{{searchQuery}}" confirm-type="search" />
+
+      <view class="filters">
+        <picker mode="selector" bindchange="onFilterChange" data-key="industry" value="{{filterIndex.industry}}" range="{{filterOptions.industry}}">
+          <view class="filter-item">{{filterDisplay.industry}}</view>
+        </picker>
+        <picker mode="selector" bindchange="onFilterChange" data-key="type" value="{{filterIndex.type}}" range="{{filterOptions.type}}">
+          <view class="filter-item">{{filterDisplay.type}}</view>
+        </picker>
+        <picker mode="selector" bindchange="onFilterChange" data-key="city" value="{{filterIndex.city}}" range="{{filterOptions.city}}">
+          <view class="filter-item">{{filterDisplay.city}}</view>
+        </picker>
+        <picker mode="selector" bindchange="onFilterChange" data-key="name" value="{{filterIndex.name}}" range="{{filterOptions.name}}">
+          <view class="filter-item">{{filterDisplay.name}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 统计栏 -->
+    <view class="bar">
+      <text class="count">共 {{filteredCount}} 条 / 总 {{data.length}} 条</text>
+      <view class="btns">
+        <view class="btn ghost" bindtap="resetFilters">重置</view>
+        <view class="btn" bindtap="downloadExcel">⬇ 下载Excel</view>
+      </view>
+    </view>
+
+    <!-- 列表 -->
+    <view class="hlist">
+      <view class="hitem" wx:for="{{filteredData}}" wx:key="seq">
+        <view class="meta">
+          <text class="name">{{item.name}}</text>
+          <text class="tag time" wx:if="{{item.time}}">{{item.time}}</text>
+          <text class="tag" wx:if="{{item.type}}">{{item.type}}</text>
+          <text class="tag city" wx:if="{{item.city}}">{{item.city}}</text>
+        </view>
+        <view class="d">{{item.desc}}</view>
+        <view class="lk" wx:if="{{item.url}}" bindtap="copyLink" data-url="{{item.url}}">🔗 {{item.source || '查看来源'}}</view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{!filteredData.length}}">未找到匹配的动态</view>
+  </view>
+
+  <!-- 底部 Tab -->
+  <view class="tabbar">
+    <view class="tab {{activeTab === 'today' ? 'on' : ''}}" bindtap="switchTab" data-tab="today">
+      <text class="ic">📅</text>
+      <text>当日动态</text>
+    </view>
+    <view class="tab {{activeTab === 'history' ? 'on' : ''}}" bindtap="switchTab" data-tab="history">
+      <text class="ic">🗂</text>
+      <text>历史动态</text>
+    </view>
+  </view>
+</view>

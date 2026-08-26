@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1F3B73",
+    "navigationBarTitleText": "无锡企业商业动态",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#eef1f6",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

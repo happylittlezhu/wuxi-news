@@ -1,0 +1,334 @@
+/* ==================== 页面布局 ==================== */
+.page {
+  min-height: 100vh;
+  padding-bottom: 120rpx;
+}
+
+/* ==================== 顶部横幅 ==================== */
+.top {
+  background: linear-gradient(135deg, #1F3B73, #3a5da8);
+  padding: 18rpx 36rpx 14rpx;
+  text-align: center;
+}
+.top-title {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 2rpx;
+  line-height: 1.5;
+}
+.top-sub {
+  font-size: 23rpx;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+}
+.accent-bar {
+  width: 80rpx;
+  height: 6rpx;
+  background: #c8a24a;
+  border-radius: 4rpx;
+  margin: 12rpx auto 0;
+}
+
+/* ==================== 通用容器 ==================== */
+.wrap {
+  padding: 24rpx 24rpx 0;
+}
+
+.daterow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  margin: 0 4rpx 28rpx;
+  color: #66707f;
+  font-size: 26rpx;
+}
+.daterow .dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  background: #c8a24a;
+}
+
+/* ==================== 加载中 ==================== */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20rpx;
+  padding: 120rpx 0;
+  color: #66707f;
+  font-size: 28rpx;
+}
+.loading-dot {
+  width: 48rpx;
+  height: 48rpx;
+  border: 6rpx solid #e6e9f0;
+  border-top-color: #1F3B73;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==================== 当日动态卡片 ==================== */
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+}
+.card {
+  background: #fff;
+  border: 1rpx solid #e6e9f0;
+  border-radius: 32rpx;
+  padding: 32rpx 32rpx 28rpx;
+  box-shadow: 0 4rpx 20rpx rgba(31, 59, 115, 0.07);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8rpx;
+  background: linear-gradient(#1F3B73, #3a5da8);
+}
+.card-title {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 18rpx;
+}
+.idx {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48rpx;
+  height: 48rpx;
+  padding: 0 14rpx;
+  background: #1F3B73;
+  color: #fff;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  font-weight: 700;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+.card-title .t {
+  flex: 1;
+  font-size: 33rpx;
+  font-weight: 800;
+  line-height: 1.45;
+  color: #1c2536;
+}
+.event {
+  margin: 0 0 22rpx;
+  color: #2b3648;
+  font-size: 29rpx;
+  text-align: justify;
+  line-height: 1.65;
+}
+.relation {
+  background: linear-gradient(180deg, #eef4fc, #e6eefa);
+  border: 1rpx solid #cddcf3;
+  border-left: 6rpx solid #1F3B73;
+  border-radius: 20rpx;
+  padding: 20rpx 24rpx;
+  margin: 0 0 22rpx;
+}
+.relation-lab {
+  font-size: 23rpx;
+  font-weight: 800;
+  color: #1F3B73;
+  letter-spacing: 1rpx;
+  margin-bottom: 6rpx;
+}
+.relation-text {
+  font-size: 27.6rpx;
+  color: #28405f;
+  text-align: justify;
+  line-height: 1.65;
+}
+.card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+  border-top: 1rpx dashed #e6e9f0;
+  padding-top: 18rpx;
+  font-size: 25rpx;
+  color: #66707f;
+}
+.src-link {
+  color: #1155cc;
+  flex-shrink: 0;
+}
+
+/* ==================== 历史动态工具区 ==================== */
+.tools {
+  background: #fff;
+  border: 1rpx solid #e6e9f0;
+  border-radius: 28rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(31, 59, 115, 0.07);
+}
+.search {
+  width: 100%;
+  padding: 24rpx 26rpx;
+  border: 3rpx solid #e6e9f0;
+  border-radius: 22rpx;
+  font-size: 30rpx;
+  background: #fff;
+}
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+  margin-top: 18rpx;
+}
+.filter-item {
+  padding: 20rpx 16rpx;
+  border: 1rpx solid #e6e9f0;
+  border-radius: 20rpx;
+  background: #fff;
+  font-size: 27rpx;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ==================== 统计栏 ==================== */
+.bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16rpx;
+  margin: 0 4rpx 20rpx;
+  flex-wrap: wrap;
+}
+.bar .count {
+  color: #66707f;
+  font-size: 26rpx;
+}
+.btns {
+  display: flex;
+  gap: 16rpx;
+}
+.btn {
+  font-size: 26rpx;
+  padding: 18rpx 26rpx;
+  border-radius: 20rpx;
+  border: 2rpx solid #1F3B73;
+  background: #1F3B73;
+  color: #fff;
+  line-height: 1.2;
+}
+.btn.ghost {
+  background: #fff;
+  color: #1F3B73;
+}
+
+/* ==================== 历史动态列表 ==================== */
+.hlist {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+.hitem {
+  background: #fff;
+  border: 1rpx solid #e6e9f0;
+  border-radius: 26rpx;
+  padding: 24rpx 26rpx;
+  box-shadow: 0 4rpx 20rpx rgba(31, 59, 115, 0.07);
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.meta .name {
+  font-weight: 800;
+  font-size: 29rpx;
+  color: #1F3B73;
+}
+.tag {
+  display: inline-block;
+  background: #eef3fb;
+  color: #274472;
+  border-radius: 14rpx;
+  padding: 4rpx 16rpx;
+  font-size: 23rpx;
+  line-height: 1.6;
+}
+.tag.time {
+  background: #eef7f0;
+  color: #1a7f4b;
+}
+.tag.city {
+  background: #fdf1ec;
+  color: #b5451c;
+}
+.hitem .d {
+  color: #39435a;
+  font-size: 27.6rpx;
+  text-align: justify;
+  margin: 6rpx 0 14rpx;
+  line-height: 1.65;
+}
+.hitem .lk {
+  font-size: 25rpx;
+  color: #1155cc;
+}
+
+/* ==================== 空状态 ==================== */
+.empty {
+  padding: 72rpx;
+  text-align: center;
+  color: #66707f;
+  font-size: 28rpx;
+}
+
+/* ==================== 底部 Tab ==================== */
+.tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120rpx;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: saturate(1.4) blur(8px);
+  border-top: 1rpx solid #e6e9f0;
+  display: flex;
+  z-index: 30;
+  box-shadow: 0 -4rpx 24rpx rgba(31, 59, 115, 0.08);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+  color: #66707f;
+  font-size: 23rpx;
+}
+.tab .ic {
+  font-size: 40rpx;
+  line-height: 1;
+}
+.tab.on {
+  color: #1F3B73;
+  font-weight: 800;
+}
+.tab.on .ic {
+  transform: translateY(-2rpx);
+}
