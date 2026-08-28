@@ -12,6 +12,7 @@ new_data.json 格式：
 }
 """
 import json, os, re, sys, io
+from datetime import datetime
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 HTML = sys.argv[1] if len(sys.argv) > 1 else os.path.join(BASE, 'index.html')
@@ -62,11 +63,45 @@ def sort_records_desc(records):
     return sorted(records, key=lambda r: time_key(r.get('time', '')), reverse=True)
 
 
+def extract_time_from_text(text):
+    """从正文中提取事件日期，返回 'YYYY-MM-DD' 或 'YYYY-MM'；提取不到返回 None"""
+    if not text:
+        return None
+    m = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日', text)
+    if m:
+        return '%s-%02d-%02d' % (m.group(1), int(m.group(2)), int(m.group(3)))
+    m = re.search(r'(\d{4})年(\d{1,2})月', text)
+    if m:
+        return '%s-%02d' % (m.group(1), int(m.group(2)))
+    m = re.search(r'(\d{1,2})月(\d{1,2})日', text)
+    if m:
+        return '%s-%02d-%02d' % (datetime.now().year, int(m.group(1)), int(m.group(2)))
+    return None
+
+
 def sort_today_desc(today):
-    """当日精选按可选 time 字段由近及远排序；无 time 字段时保持给定顺序"""
-    if today and all(str(it.get('time', '')).strip() for it in today):
-        return sorted(today, key=lambda it: time_key(it.get('time', '')), reverse=True)
-    return today
+    """当日精选按事件时间由近及远排序。
+
+    时间来源优先级：time 字段 > 从 title/event 正文提取的日期。
+    完全无法确定时间的条目排在最后，保持原相对顺序（稳定排序）。
+    """
+    if not today:
+        return today
+
+    def eff_time(it):
+        t = str(it.get('time', '')).strip()
+        if t:
+            return t
+        text = ' '.join([str(it.get('title', '')), str(it.get('event', ''))])
+        return extract_time_from_text(text) or ''
+
+    def key(it):
+        return time_key(eff_time(it))
+
+    with_t = [it for it in today if key(it)[0] > 0]
+    without_t = [it for it in today if key(it)[0] <= 0]
+    with_t = sorted(with_t, key=key, reverse=True)
+    return with_t + without_t
 
 
 def main():
