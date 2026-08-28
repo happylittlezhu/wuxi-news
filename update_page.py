@@ -173,7 +173,7 @@ def main():
     try:
         json_out = {
             'date': date,
-            'today': today,
+            'today': sort_today_desc(today),
             'data': data,
             'total': data_total
         }
