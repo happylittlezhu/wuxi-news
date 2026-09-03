@@ -169,20 +169,7 @@ def main():
     except ImportError:
         print('NOTE: 未安装 openpyxl，跳过 Excel 更新')
 
-    # 同步输出 data.json（供微信小程序 wx.request 拉取）
-    try:
-        json_out = {
-            'date': date,
-            'today': sort_today_desc(today),
-            'data': data,
-            'total': data_total
-        }
-        json_path = os.path.join(os.path.dirname(os.path.abspath(HTML)), 'data.json')
-        with io.open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(json_out, f, ensure_ascii=False)
-        print('OK: data.json 已同步更新（%d 条 + 当日精选 %d 条）' % (data_total, len(today)))
-    except Exception as e:
-        print('WARN: data.json 输出失败: %s' % e)
+    # （2026-09-03 起不再输出 data.json：该文件仅供微信小程序拉取，小程序已停止维护）
 
 
 if __name__ == '__main__':
